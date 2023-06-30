@@ -1,3 +1,13 @@
+//Perform Bot Attack against shared glitch application
+const baseUrl = 'https://cprice-p1-protect.ping-devops.com'
+//Perform Bot Attack against local deployment of PingOne Protect Application
+// const baseUrl = 'http://localhost:3000'
+
+//MAC-Chrome-Browser-Path
+const browserExecutablePath = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
+//Windows-Chrome-Browser-Path
+// const browserExecutablePath = 'C:/Program Files/Google/Chrome/Application/chrome.exe'
+
 const puppeteer = require('puppeteer-extra') 
  
 // Add stealth plugin and use defaults 
@@ -21,7 +31,7 @@ puppeteer.use(ua)
 */
 
 
-puppeteer.launch({ headless:false, args: ['--no-sandbox', '--disable-blink-features=AutomationControlled', '--disable-web-security', '--disable-xss-auditor'], executablePath: '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' }).then(async browser => {
+puppeteer.launch({ headless:false, args: ['--no-sandbox', '--disable-blink-features=AutomationControlled', '--disable-web-security', '--disable-xss-auditor'], executablePath: browserExecutablePath}).then(async browser => {
 
   //browser new page
    const p = await browser.newPage();
@@ -29,7 +39,7 @@ puppeteer.launch({ headless:false, args: ['--no-sandbox', '--disable-blink-featu
    await p.setBypassCSP(true);
 
    //launch URL
-   await p.goto('https://cprice-p1-protect.ping-devops.com/loginForm.html')
+   await p.goto(baseUrl+'/loginForm.html')
    console.log("timeout started")
    await p.waitForTimeout(6000)
    console.log("timeout ended")

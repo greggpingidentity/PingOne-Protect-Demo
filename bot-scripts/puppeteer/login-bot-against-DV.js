@@ -1,3 +1,13 @@
+//Perform Bot Attack against shared glitch application
+const baseUrl = 'https://cprice-p1-protect.ping-devops.com'
+//Perform Bot Attack against local deployment of PingOne Protect Application
+// const baseUrl = 'http://localhost:3000'
+
+//MAC-Chrome-Browser-Path
+const browserExecutablePath = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
+//Windows-Chrome-Browser-Path
+// const browserExecutablePath = 'C:/Program Files/Google/Chrome/Application/chrome.exe'
+
 //const myCursor = require('ghost-cursor')
 const puppeteer = require('puppeteer-extra')
 //const {installMouseHelper} = require('./install-mouse-helper');
@@ -30,7 +40,7 @@ puppeteer.use(ua)
 
 
 
-puppeteer.launch({ headless: false, args: ['--no-sandbox', '--disable-blink-features=AutomationControlled', '--disable-web-security', '--disable-xss-auditor'], executablePath: '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' }).then(async browser => {
+puppeteer.launch({ headless: false, args: ['--no-sandbox', '--disable-blink-features=AutomationControlled', '--disable-web-security', '--disable-xss-auditor'], executablePath: browserExecutablePath }).then(async browser => {
   //browser new page
 
   //browser new page
@@ -39,7 +49,7 @@ puppeteer.launch({ headless: false, args: ['--no-sandbox', '--disable-blink-feat
   await p.setBypassCSP(true);
 
   //launch URL
-  await p.goto('https://cprice-p1-protect.ping-devops.com/oidc.html')
+  await p.goto(baseUrl+'/oidc.html')
   console.log("timeout started")
   await p.waitForTimeout(6000)
   console.log("timeout ended")
